@@ -12,9 +12,9 @@ class event(enum.Enum):
    """
    event: Enumeration for GPIO input detection.
    """
-   RISING_EDGE = GPIO.RISING
-   FALLING_EDGE = GPIO.FALLING
-   BOTH_EDGES = GPIO.BOTH
+   RISING_EDGE = 0
+   FALLING_EDGE = 1
+   BOTH_EDGES = 2
 
 class output:
    """
@@ -73,6 +73,8 @@ class output:
 class input:
    """
    input: User friendly implementation for digital inputs such as buttons.
+          Contains functionality for event detection on rising edge, falling edge
+          and both edges with eligible callback routine and bouncetime.
 
           Parameters:
           __pin: Stores the input pin number for reading input values.

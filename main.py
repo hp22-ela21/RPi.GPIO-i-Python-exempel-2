@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 ################################################################################
-# main.py: Implementation of GPIO with edge detection in Python.
+# main.py: Implementation of GPIO with event detection in Python.
 ################################################################################
 import gpio 
 
