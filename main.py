@@ -44,12 +44,13 @@ def main():
          The leds are either blinking every 100 ms or turned off, depending on state.
          Event detection is enabled for rising edge at pin 27. When the button is 
          pressed, callback routine button_is_pressed is called to toggle the state of
-         the leds between blinking (enabled) and turned off.
+         the leds between blinking (enabled) and turned off. A bouncetime off 500 ms
+         is used to negate effects of contact bounces.
    """
 
    leds = [ gpio.output(17), gpio.output(22), gpio.output(23) ]
    button1 = gpio.input(27) 
-   button1.enable_event(gpio.event.RISING_EDGE, button_is_pressed)
+   button1.enable_event(gpio.event.RISING_EDGE, button_is_pressed, bouncetime = 500)
 
    while True:
       if leds_enabled:

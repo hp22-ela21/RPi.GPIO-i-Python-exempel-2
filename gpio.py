@@ -92,18 +92,20 @@ class input:
       """
       return GPIO.input(self.__pin)
 
-   def enable_event(self, event_type, callback_routine):
+   def enable_event(self, event_type, callback_routine, bouncetime = None):
       """
       enable_event: Enables event detection for specified event type on input pin.
                     which should be passed as an enumerator of the event enumeration.
                     If specified event occurs, the callback routine will be called.
+                    Optional parameter bouncetime can be utilized to negate effects
+                    of contact bounces if the pin is connected to a button.
       """
       if event_type == event.RISING_EDGE:
-         GPIO.add_event_detect(self.__pin, GPIO.RISING, callback = callback_routine)
+         GPIO.add_event_detect(self.__pin, GPIO.RISING, callback = callback_routine, bouncetime = bouncetime)
       elif event_type == event.FALLING_EDGE:
-         GPIO.add_event_detect(self.__pin, GPIO.FALLING, callback = callback_routine)
+         GPIO.add_event_detect(self.__pin, GPIO.FALLING, callback = callback_routine, bouncetime = bouncetime)
       elif event_type == event.BOTH_EDGES:
-         GPIO.add_event_detect(self.__pin, GPIO.BOTH, callback = callback_routine)
+         GPIO.add_event_detect(self.__pin, GPIO.BOTH, callback = callback_routine, bouncetime = bouncetime)
       else:
          print("Could not enable event for type " + str(event_type) + "!\n")
       return
