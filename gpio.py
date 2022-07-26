@@ -35,6 +35,15 @@ class output:
       GPIO.output(self.__pin, start_val)
       return
 
+   def __del__(self):
+      """
+      __del__: Setting low output value on pin and resetting data direction
+               to input when the object is deleted.
+      """
+      GPIO.output(self.__pin, 0)
+      GPIO.setup(self.__pin, GPIO.IN)
+      return
+
    def on(self):
       """
       on: Sets output value to high.
@@ -86,6 +95,14 @@ class input:
       """
       self.__pin = pin 
       GPIO.setup(self.__pin, GPIO.IN)
+      return
+
+   def __del__(self):
+      """
+      __del__: Disabling potential event detection when the object is deleted.
+      """
+      GPIO.remove_event_detect(self.__pin) 
+      return
       return
 
    def read(self):
