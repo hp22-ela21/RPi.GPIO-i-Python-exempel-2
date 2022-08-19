@@ -8,10 +8,13 @@ import gpio
 # Global variables:
 leds_enabled = False # Indicates led state (off or blinking).
 
-def button_is_pressed(button):
+def button_is_pressed(pin):
    """
    button_is_pressed: Callback routine for toggling the state of the leds when
                       the button at pin 27 is pressed.
+
+                      - pin: The number of the GPIO pin which caused this
+                             callback routine to be called.
    """
    global leds_enabled
    leds_enabled = not leds_enabled
@@ -21,6 +24,9 @@ def leds_blink(leds, blink_speed_ms):
    """
    leds_blink: Blinking leds stored in a list in a sequence with specified blink speed.
                Before the sequence begins, all leds are turned off.
+
+               - leds          : List containing multiple leds.
+               - blink_speed_ms: Blink speed in milliseconds.
    """
    leds_off(leds)
    for i in leds:
@@ -32,6 +38,8 @@ def leds_blink(leds, blink_speed_ms):
 def leds_off(leds):
    """
    leds_off: Turns off leds stored in a list by setting low output signals.
+   
+             leds: List containing multiple leds.
    """
    for i in leds:
       i.off()
@@ -44,7 +52,7 @@ def main():
          The leds are either blinking every 100 ms or turned off, depending on state.
          Event detection is enabled for rising edge at pin 27. When the button is 
          pressed, callback routine button_is_pressed is called to toggle the state of
-         the leds between blinking (enabled) and turned off. A bouncetime off 500 ms
+         the leds between blinking (enabled) and turned off. A bouncetime of 500 ms
          is used to negate effects of contact bounces.
    """
 
